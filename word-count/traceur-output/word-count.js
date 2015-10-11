@@ -6,9 +6,9 @@ var $__default = function() {
   return {count: $traceurRuntime.initTailRecursiveFunction(function(phrase) {
       return $traceurRuntime.call(function(phrase) {
         return ($__0 = phrase.trim().split(/\s+/), $traceurRuntime.continuation($__0.reduce, $__0, [function(counts, word) {
-          counts[$traceurRuntime.toProperty(word)] = counts.hasOwnProperty(word) ? counts[$traceurRuntime.toProperty(word)] + 1 : 1;
+          counts[$traceurRuntime.toProperty(word)] = counts[$traceurRuntime.toProperty(word)] ? counts[$traceurRuntime.toProperty(word)] + 1 : 1;
           return counts;
-        }, {}]));
+        }, Object.create({})]));
       }, this, arguments);
     })};
 };
