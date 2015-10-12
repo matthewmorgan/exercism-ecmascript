@@ -1,16 +1,14 @@
-'use strict';
-
 export default () => {
-  let roster = {};
-  let add = (student, grade) => {
-    roster[grade] ? roster[grade].push(student) : roster[grade] = [student];
-    roster[grade].sort();
-  };
-  let getReadOnly = (db) => JSON.parse(JSON.stringify(db));
+  let roster = {},
+      add = (student, grade) => {
+        roster[grade] ? roster[grade].push(student) : roster[grade] = [student];
+        roster[grade].sort();
+      },
+      getCopy = (db) => JSON.parse(JSON.stringify(db));
 
   return {
-    roster: () => getReadOnly(roster),
+    roster: () => getCopy(roster),
     add: (student, grade) => add(student, grade),
-    grade: (grade) => getReadOnly(roster[grade] || [])
+    grade: (grade) => getCopy(roster[grade] || [])
   }
 }

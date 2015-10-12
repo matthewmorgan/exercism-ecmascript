@@ -1,21 +1,20 @@
 "use strict";
-'use strict';
 $traceurRuntime.options.symbols = true;
 var $__default = function() {
-  var roster = {};
-  var add = function(student, grade) {
-    roster[$traceurRuntime.toProperty(grade)] ? roster[$traceurRuntime.toProperty(grade)].push(student) : roster[$traceurRuntime.toProperty(grade)] = [student];
-    roster[$traceurRuntime.toProperty(grade)].sort();
-  };
-  var getReadOnly = $traceurRuntime.initTailRecursiveFunction(function(db) {
-    return $traceurRuntime.call(function(db) {
-      return $traceurRuntime.continuation(JSON.parse, JSON, [JSON.stringify(db)]);
-    }, this, arguments);
-  });
+  var roster = {},
+      add = function(student, grade) {
+        roster[$traceurRuntime.toProperty(grade)] ? roster[$traceurRuntime.toProperty(grade)].push(student) : roster[$traceurRuntime.toProperty(grade)] = [student];
+        roster[$traceurRuntime.toProperty(grade)].sort();
+      },
+      getCopy = $traceurRuntime.initTailRecursiveFunction(function(db) {
+        return $traceurRuntime.call(function(db) {
+          return $traceurRuntime.continuation(JSON.parse, JSON, [JSON.stringify(db)]);
+        }, this, arguments);
+      });
   return {
     roster: $traceurRuntime.initTailRecursiveFunction(function() {
       return $traceurRuntime.call(function() {
-        return $traceurRuntime.continuation(getReadOnly, null, [roster]);
+        return $traceurRuntime.continuation(getCopy, null, [roster]);
       }, this, arguments);
     }),
     add: $traceurRuntime.initTailRecursiveFunction(function(student, grade) {
@@ -25,7 +24,7 @@ var $__default = function() {
     }),
     grade: $traceurRuntime.initTailRecursiveFunction(function(grade) {
       return $traceurRuntime.call(function(grade) {
-        return $traceurRuntime.continuation(getReadOnly, null, [roster[$traceurRuntime.toProperty(grade)] || []]);
+        return $traceurRuntime.continuation(getCopy, null, [roster[$traceurRuntime.toProperty(grade)] || []]);
       }, this, arguments);
     })
   };
