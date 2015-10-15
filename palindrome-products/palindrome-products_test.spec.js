@@ -8,7 +8,8 @@ describe("Palindrome", function() {
 
     expect(largest.value).toEqual(9);
     //expect([1, 9]).toEqual(largest.factors);
-    expect([[3, 3], [1, 9]], [[1, 9], [3, 3]]).toContain(largest.factors);
+    console.log('largest factors: ',largest.factors);
+    expect([[1, 9], [3, 3]]).toContain(largest.factors);
 
   });
 

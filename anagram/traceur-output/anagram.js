@@ -1,5 +1,4 @@
 "use strict";
-'use strict';
 var $__1;
 $traceurRuntime.options.symbols = true;
 var targetWord = '';
@@ -25,7 +24,7 @@ var $__default = function(word) {
         for (var more = [],
             $__0 = 1; $__0 < arguments.length; $__0++)
           more[$traceurRuntime.toProperty($__0 - 1)] = arguments[$traceurRuntime.toProperty($__0)];
-        possibles instanceof Array ? more = more.concat(possibles) : more.push(possibles);
+        Array.isArray(possibles) ? more = more.concat(possibles) : more.push(possibles);
         return $traceurRuntime.continuation(matches, null, [more]);
       }, this, arguments);
     })};

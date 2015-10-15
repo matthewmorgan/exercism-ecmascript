@@ -13,7 +13,7 @@ var generateName = function() {
   usedNames[$traceurRuntime.toProperty(name)] ? name = generateName() : usedNames[$traceurRuntime.toProperty(name)] = true;
   return name;
 };
-var Robot = function() {
+var $__default = Robot = function() {
   robotName = generateName();
   return {
     name: robotName,
@@ -22,7 +22,6 @@ var Robot = function() {
     }
   };
 };
-var $__default = Robot;
 Object.defineProperties(module.exports, {
   default: {get: function() {
       return $__default;
