@@ -1,5 +1,4 @@
 "use strict";
-'use strict';
 $traceurRuntime.options.symbols = true;
 var $__default = function(input) {
   input = validate(input);
