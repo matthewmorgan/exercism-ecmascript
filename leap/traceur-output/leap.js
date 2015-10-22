@@ -1,14 +1,8 @@
 "use strict";
 $traceurRuntime.options.symbols = true;
-var Leap = $traceurRuntime.initTailRecursiveFunction(function() {
-  return $traceurRuntime.call(function() {
-    function Leap(year) {
-      return (year % 100 || !(year % 400)) && !(year % 4);
-    }
-    return $traceurRuntime.continuation($traceurRuntime.createClass, $traceurRuntime, [Leap, {}, {}]);
-  }, this, arguments);
-})();
-var $__default = Leap;
+var $__default = function(year) {
+  return year % 400 === 0 || (year % 4 === 0 && year % 100 !== 0);
+};
 Object.defineProperties(module.exports, {
   default: {get: function() {
       return $__default;
