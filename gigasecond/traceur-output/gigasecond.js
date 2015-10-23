@@ -1,19 +1,17 @@
 "use strict";
 $traceurRuntime.options.symbols = true;
+var GIGASECOND_IN_MILLISECONDS = Math.pow(10, 9) * Math.pow(10, 3);
 var Gigasecond = $traceurRuntime.initTailRecursiveFunction(function() {
   return $traceurRuntime.call(function() {
-    function Gigasecond(start) {
-      this.start = start;
+    function Gigasecond(date) {
+      this.newDate = new Date(date.getTime() + GIGASECOND_IN_MILLISECONDS);
     }
-    return $traceurRuntime.continuation($traceurRuntime.createClass, $traceurRuntime, [Gigasecond, {date: $traceurRuntime.initTailRecursiveFunction(function() {
-        return $traceurRuntime.call(function() {
-          return $traceurRuntime.continuation($traceurRuntime.construct, Date, [Date.parse(this.start) + Math.pow(10, 12)]);
-        }, this, arguments);
-      })}, {}]);
+    return $traceurRuntime.continuation($traceurRuntime.createClass, $traceurRuntime, [Gigasecond, {date: function() {
+        return this.newDate;
+      }}, {}]);
   }, this, arguments);
 })();
 var $__default = Gigasecond;
-;
 Object.defineProperties(module.exports, {
   default: {get: function() {
       return $__default;

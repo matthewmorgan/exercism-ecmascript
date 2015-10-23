@@ -1,5 +1,3 @@
-'use strict';
-
 let MSPERGIGASECOND=1000000000000;
 
 export default (born) => {
