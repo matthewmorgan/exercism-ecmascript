@@ -1,3 +1,3 @@
-let map = {C:'G', G:'C', A:'U',T:'A'};
+let complement = {C:'G', G:'C', A:'U',T:'A'};
 
-export default () => { return { toRna : (rna) => rna.split('').map((el)=> map[el]).join('') } };
+export default () => ({ toRna: (dna) => [...dna].map((nuc)=> complement[nuc]).join('')})

@@ -1,25 +1,21 @@
 "use strict";
 $traceurRuntime.options.symbols = true;
-var dnaToRnaMapping = {
+var complement = {
   C: 'G',
   G: 'C',
   A: 'U',
   T: 'A'
 };
-var Transcriptor = $traceurRuntime.initTailRecursiveFunction(function() {
-  return $traceurRuntime.call(function() {
-    var $__1;
-    function Transcriptor() {}
-    return $traceurRuntime.continuation($traceurRuntime.createClass, $traceurRuntime, [Transcriptor, {toRna: $traceurRuntime.initTailRecursiveFunction(function(dnaStrand) {
-        return $traceurRuntime.call(function(dnaStrand) {
-          return ($__1 = dnaStrand.split('').map(function(base) {
-            return dnaToRnaMapping[$traceurRuntime.toProperty(base)];
-          }), $traceurRuntime.continuation($__1.join, $__1, ['']));
-        }, this, arguments);
-      })}, {}]);
-  }, this, arguments);
-})();
-var $__default = Transcriptor;
+var $__default = function() {
+  var $__0;
+  return ({toRna: $traceurRuntime.initTailRecursiveFunction(function(dna) {
+      return $traceurRuntime.call(function(dna) {
+        return ($__0 = $traceurRuntime.spread(dna).map(function(nuc) {
+          return complement[$traceurRuntime.toProperty(nuc)];
+        }), $traceurRuntime.continuation($__0.join, $__0, ['']));
+      }, this, arguments);
+    })});
+};
 Object.defineProperties(module.exports, {
   default: {get: function() {
       return $__default;
