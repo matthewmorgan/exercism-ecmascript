@@ -15,6 +15,13 @@ describe('School', function() {
     var expectedDb = {2: ['Aimee']};
     expect(school.roster()).toEqual(expectedDb);
   });
+  it('roster cannot be modified outside of module', function() {
+    school.add('Aimee', 2);
+    var roster = school.roster();
+    roster[3] = ['Oops.'];
+    var expectedDb = {2: ['Aimee']};
+    expect(school.roster()).toEqual(expectedDb);
+  });
   it('adding more students to the same grade adds them to the roster', function() {
     school.add('Blair', 2);
     school.add('James', 2);

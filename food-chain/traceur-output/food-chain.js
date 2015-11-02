@@ -29,7 +29,7 @@ var verses = {
   horse: {conclusion: "She's dead, of course!"}
 };
 var animalNames = Object.keys(verses);
-buildVerse = $traceurRuntime.initTailRecursiveFunction(function(num, song) {
+var buildVerse = $traceurRuntime.initTailRecursiveFunction(function(num, song) {
   return $traceurRuntime.call(function(num, song) {
     var showComment = arguments[2] !== (void 0) ? arguments[2] : true;
     var name = animalNames[$traceurRuntime.toProperty(--num)];
@@ -48,7 +48,7 @@ buildVerse = $traceurRuntime.initTailRecursiveFunction(function(num, song) {
     return $traceurRuntime.continuation(buildVerse, null, [num, song, false]);
   }, this, arguments);
 });
-buildVerses = function(start, stop) {
+var buildVerses = function(start, stop) {
   var song = '';
   while (start <= stop) {
     song += buildVerse(start++) + '\n';
