@@ -1,34 +1,29 @@
 "use strict";
 $traceurRuntime.options.symbols = true;
-var $__default = function() {
-  var roster = {},
-      add = function(student, grade) {
-        roster[$traceurRuntime.toProperty(grade)] ? roster[$traceurRuntime.toProperty(grade)].push(student) : roster[$traceurRuntime.toProperty(grade)] = [student];
-        roster[$traceurRuntime.toProperty(grade)].sort();
-      },
-      getCopy = $traceurRuntime.initTailRecursiveFunction(function(db) {
-        return $traceurRuntime.call(function(db) {
-          return $traceurRuntime.continuation(JSON.parse, JSON, [JSON.stringify(db)]);
+var roster;
+var School = $traceurRuntime.initTailRecursiveFunction(function() {
+  return $traceurRuntime.call(function() {
+    function School() {
+      roster = {};
+    }
+    return $traceurRuntime.continuation($traceurRuntime.createClass, $traceurRuntime, [School, {
+      roster: $traceurRuntime.initTailRecursiveFunction(function() {
+        return $traceurRuntime.call(function() {
+          return $traceurRuntime.continuation(JSON.parse, JSON, [JSON.stringify(roster)]);
         }, this, arguments);
-      });
-  return {
-    roster: $traceurRuntime.initTailRecursiveFunction(function() {
-      return $traceurRuntime.call(function() {
-        return $traceurRuntime.continuation(getCopy, null, [roster]);
-      }, this, arguments);
-    }),
-    add: $traceurRuntime.initTailRecursiveFunction(function(student, grade) {
-      return $traceurRuntime.call(function(student, grade) {
-        return $traceurRuntime.continuation(add, null, [student, grade]);
-      }, this, arguments);
-    }),
-    grade: $traceurRuntime.initTailRecursiveFunction(function(grade) {
-      return $traceurRuntime.call(function(grade) {
-        return $traceurRuntime.continuation(getCopy, null, [roster[$traceurRuntime.toProperty(grade)] || []]);
-      }, this, arguments);
-    })
-  };
-};
+      }),
+      add: function(name, grade) {
+        roster[$traceurRuntime.toProperty(grade)] = this.grade(grade).concat(name).sort();
+      },
+      grade: $traceurRuntime.initTailRecursiveFunction(function(grade) {
+        return $traceurRuntime.call(function(grade) {
+          return $traceurRuntime.continuation(Array.from, Array, [roster[$traceurRuntime.toProperty(grade)] || []]);
+        }, this, arguments);
+      })
+    }, {}]);
+  }, this, arguments);
+})();
+var $__default = School;
 Object.defineProperties(module.exports, {
   default: {get: function() {
       return $__default;
