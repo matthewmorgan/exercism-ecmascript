@@ -1,14 +1,15 @@
 "use strict";
 $traceurRuntime.options.symbols = true;
-var GIGASECOND_IN_MILLISECONDS = Math.pow(10, 9) * Math.pow(10, 3);
 var Gigasecond = $traceurRuntime.initTailRecursiveFunction(function() {
   return $traceurRuntime.call(function() {
     function Gigasecond(date) {
-      this.newDate = new Date(date.getTime() + GIGASECOND_IN_MILLISECONDS);
+      this.start = Date.parse(date);
     }
-    return $traceurRuntime.continuation($traceurRuntime.createClass, $traceurRuntime, [Gigasecond, {date: function() {
-        return this.newDate;
-      }}, {}]);
+    return $traceurRuntime.continuation($traceurRuntime.createClass, $traceurRuntime, [Gigasecond, {date: $traceurRuntime.initTailRecursiveFunction(function() {
+        return $traceurRuntime.call(function() {
+          return $traceurRuntime.continuation($traceurRuntime.construct, Date, [this.start + Math.pow(10, 12)]);
+        }, this, arguments);
+      })}, {}]);
   }, this, arguments);
 })();
 var $__default = Gigasecond;
