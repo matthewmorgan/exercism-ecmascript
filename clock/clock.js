@@ -1,6 +1,6 @@
 export default function (hour, minute) {
   const MINUTESPERDAY = 1440;
-
+  const self = this;
   let clock = (hour || 0) * 60 + (minute || 0);
 
   function formatChunk(num) {
@@ -26,7 +26,7 @@ export default function (hour, minute) {
     },
     plus:      function(minutes){
       adjustTime(minutes);
-      return this;
+      return self;
     },
     minus:    function (minutes) {
       adjustTime(-minutes);

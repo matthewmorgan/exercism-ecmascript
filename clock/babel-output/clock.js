@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 
 exports["default"] = function (hour, minute) {
   var MINUTESPERDAY = 1440;
-
+  var self = this;
   var clock = (hour || 0) * 60 + (minute || 0);
 
   function formatChunk(num) {
@@ -31,7 +31,7 @@ exports["default"] = function (hour, minute) {
     },
     plus: function plus(minutes) {
       adjustTime(minutes);
-      return this;
+      return self;
     },
     minus: function minus(minutes) {
       adjustTime(-minutes);
