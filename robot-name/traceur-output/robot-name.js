@@ -1,8 +1,7 @@
 "use strict";
 $traceurRuntime.options.symbols = true;
-var robotName = '',
+var alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
     usedNames = {};
-var alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 var random = $traceurRuntime.initTailRecursiveFunction(function(max) {
   return $traceurRuntime.call(function(max) {
     return $traceurRuntime.continuation(Math.floor, Math, [Math.random() * max]);
@@ -13,15 +12,31 @@ var generateName = function() {
   usedNames[$traceurRuntime.toProperty(name)] ? name = generateName() : usedNames[$traceurRuntime.toProperty(name)] = true;
   return name;
 };
-var $__default = Robot = function() {
-  robotName = generateName();
-  return {
-    name: robotName,
-    reset: function() {
-      this.name = generateName();
+var Robot = $traceurRuntime.initTailRecursiveFunction(function() {
+  return $traceurRuntime.call(function() {
+    var $__1;
+    function Robot() {
+      this.robotName = generateName();
     }
-  };
-};
+    return $traceurRuntime.continuation($traceurRuntime.createClass, $traceurRuntime, [Robot, ($__1 = {}, Object.defineProperty($__1, "name", {
+      get: function() {
+        return this.robotName;
+      },
+      configurable: true,
+      enumerable: true
+    }), Object.defineProperty($__1, "reset", {
+      value: function() {
+        this.robotName = generateName();
+        return this;
+      },
+      configurable: true,
+      enumerable: true,
+      writable: true
+    }), $__1), {}]);
+  }, this, arguments);
+})();
+var $__default = Robot;
+;
 Object.defineProperties(module.exports, {
   default: {get: function() {
       return $__default;

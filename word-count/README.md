@@ -53,4 +53,4 @@ changing `xit` to `it`.
 
 ## Source
 
-The golang tour [view source](http://tour.golang.org)
+This is a classic toy problem, but we were reminded of it by seeing it in the Go Tour. [view source]()

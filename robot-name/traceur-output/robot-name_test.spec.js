@@ -10,6 +10,16 @@ describe('Robot', function() {
   it('has a name', function() {
     expect(robot.name).toMatch(/^[A-Z]{2}\d{3}$/);
   });
+  it('internal name cannot be modified', function() {
+    var modifyInternal = function() {
+      return robot.name += "a modification";
+    };
+    expect(modifyInternal).toThrow();
+    var name = robot.name;
+    var modifiedName = robot.name;
+    modifiedName += "a modification";
+    expect(robot.name).toEqual(name);
+  });
   it('name is the same each time', function() {
     expect(robot.name).toEqual(robot.name);
   });

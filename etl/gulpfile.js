@@ -9,12 +9,14 @@ function getOutputDirectory(argv) {
   if (argv.output) {
     return argv.output;
   }
-  return 'traceur-output';
+  return 'babel-output';
 }
 
-var gulp = require('gulp'),
+const gulp = require('gulp'),
+  eslint = require('gulp-eslint'),
   jasmine = require('gulp-jasmine'),
-  traceur = require('gulp-traceur'),
+  babel = require('gulp-babel'),
+  polyfill = require('babel/polyfill'),
   del = require('del'),
   argv  = require('yargs').argv,
   inputDir = getInputDirectory(argv),
@@ -23,38 +25,30 @@ var gulp = require('gulp'),
 // Gulp tasks definition
 
 gulp.task('default', [ 'test' ]);
- 
-gulp.task('test', [ 'traceur', 'copy-runtime' ], function () {
-  return gulp.src([ outputDir + '/*_test.spec.js' ])
+
+gulp.task('test', [ 'babel' ], function () {
+  return gulp.src([ outputDir + '/*.spec.js' ])
     .pipe(jasmine());
 });
 
-gulp.task('traceur', function () {
+gulp.task('babel', [ 'lint' ], function () {
   return gulp.src([ inputDir + '/*.js' ])
-    .pipe(traceur({
-      modules: 'commonjs',
-
-      // experimental options
-      properTailCalls: true,
-      symbols: true,
-      annotations: true,
-      arrayComprehension: true,
-      asyncFunctions: true,
-      asyncGenerators: true,
-      exponentiation: true,
-      exportFromExtended: true,
-      forOn: true,
-      generatorComprehension: true,
-      memberVariables: true,
-      require: true,
-      types: true
-    }))
+    .pipe(babel())
     .pipe(gulp.dest(outputDir));
 });
 
-gulp.task('copy-runtime', function () {
-  return gulp.src(traceur.RUNTIME_PATH)
-    .pipe(gulp.dest(outputDir));
+gulp.task('lint', function () {
+  return gulp.src([ inputDir + '/*.js' ])
+    .pipe(eslint({
+      envs: [
+        'es6'  //turns on all es6 features except modules
+      ],
+      ecmaFeatures: {
+        'modules': true,  //this gives us modules :)
+      },
+    }))
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
 });
 
 gulp.task('clean', function (cb) {
