@@ -15,10 +15,6 @@ describe('Robot', function() {
       return robot.name += "a modification";
     };
     expect(modifyInternal).toThrow();
-    var name = robot.name;
-    var modifiedName = robot.name;
-    modifiedName += "a modification";
-    expect(robot.name).toEqual(name);
   });
   it('name is the same each time', function() {
     expect(robot.name).toEqual(robot.name);
@@ -51,4 +47,26 @@ describe('Robot', function() {
     }
     expect(Object.keys(usedNames).length).toEqual(NUMBER_OF_ROBOTS + 1);
   });
+  it('should test for sequential names', function() {
+    expect(areSequential("AA000", "AA001")).toEqual(true);
+    expect(areSequential("AA000", "AA002")).toEqual(false);
+    expect(areSequential("AA999", "AB000")).toEqual(true);
+    expect(areSequential("AA999", "AA998")).toEqual(true);
+    expect(areSequential("AA999", "AA997")).toEqual(false);
+    expect(areSequential("AB000", "AA999")).toEqual(true);
+    expect(areSequential("AB999", "AA000")).toEqual(false);
+  });
+  var areSequential = function(name1, name2) {
+    var alpha1 = name1.substr(0, 2);
+    var alpha2 = name2.substr(0, 2);
+    var num1 = +name1.substr(2, 3);
+    var num2 = +name2.substr(2, 3);
+    var numDiff = num2 - num1;
+    var alphaDiff = (alpha2.charCodeAt(0) - alpha1.charCodeAt(0)) * 26 + (alpha2.charCodeAt(1) - alpha1.charCodeAt(1));
+    console.log("name1, name 2", name1, name2);
+    console.log(alpha1, alpha2, num1, num2);
+    var totalDiff = alphaDiff * 1000 + numDiff;
+    console.log('num, alpha, total', numDiff, alphaDiff, totalDiff);
+    return Math.abs(totalDiff) <= 1;
+  };
 });

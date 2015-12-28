@@ -56,4 +56,31 @@ describe('Robot', () => {
     expect(Object.keys(usedNames).length).toEqual(NUMBER_OF_ROBOTS + 1);
   });
 
+  it('should test for sequential names', () => {
+    expect(areSequential("AA000", "AA001")).toEqual(true);
+    expect(areSequential("AA000", "AA002")).toEqual(false);
+    expect(areSequential("AA999", "AB000")).toEqual(true);
+    expect(areSequential("AA999", "AA998")).toEqual(true);
+    expect(areSequential("AA999", "AA997")).toEqual(false);
+    expect(areSequential("AB000", "AA999")).toEqual(true);
+    expect(areSequential("AB999", "AA000")).toEqual(false);
+  });
+
+
+  const areSequential = (name1, name2) => {
+    const alpha1 = name1.substr(0,2);
+    const alpha2 = name2.substr(0,2);
+    const num1 = +name1.substr(2,3);
+    const num2 = +name2.substr(2,3);
+
+    const numDiff = num2-num1;
+    const alphaDiff = (alpha2.charCodeAt(0)-alpha1.charCodeAt(0))*26
+        + (alpha2.charCodeAt(1)-alpha1.charCodeAt(1));
+
+    const totalDiff = alphaDiff*1000 + numDiff;
+
+    return Math.abs(totalDiff) <= 1;
+
+  };
+
 });
