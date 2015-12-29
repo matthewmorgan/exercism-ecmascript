@@ -4,8 +4,8 @@ const alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
 const random = (max) => Math.floor(Math.random()*max);
 
 const generateName = () => {
-  let name = alpha.charAt(random(26))
-      +alpha.charAt(random(26))
+  let name = alpha.charAt(random(alpha.length))
+      +alpha.charAt(random(alpha.length))
       +random(10)+random(10)+random(10);
   usedNames[name] ? name = generateName() : usedNames[name] = true;
   return name;
@@ -13,7 +13,7 @@ const generateName = () => {
 
 export default class Robot {
   constructor(){
-    this.robotName = generateName();
+    this.reset();
   }
 
   get name() {
@@ -22,6 +22,5 @@ export default class Robot {
 
   reset() {
     this.robotName = generateName();
-    return this;
   }
 };

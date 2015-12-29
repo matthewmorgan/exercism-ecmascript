@@ -8,7 +8,7 @@ var random = $traceurRuntime.initTailRecursiveFunction(function(max) {
   }, this, arguments);
 });
 var generateName = function() {
-  var name = alpha.charAt(random(26)) + alpha.charAt(random(26)) + random(10) + random(10) + random(10);
+  var name = alpha.charAt(random(alpha.length)) + alpha.charAt(random(alpha.length)) + random(10) + random(10) + random(10);
   usedNames[$traceurRuntime.toProperty(name)] ? name = generateName() : usedNames[$traceurRuntime.toProperty(name)] = true;
   return name;
 };
@@ -16,7 +16,7 @@ var Robot = $traceurRuntime.initTailRecursiveFunction(function() {
   return $traceurRuntime.call(function() {
     var $__1;
     function Robot() {
-      this.robotName = generateName();
+      this.reset();
     }
     return $traceurRuntime.continuation($traceurRuntime.createClass, $traceurRuntime, [Robot, ($__1 = {}, Object.defineProperty($__1, "name", {
       get: function() {
@@ -27,7 +27,6 @@ var Robot = $traceurRuntime.initTailRecursiveFunction(function() {
     }), Object.defineProperty($__1, "reset", {
       value: function() {
         this.robotName = generateName();
-        return this;
       },
       configurable: true,
       enumerable: true,
