@@ -1,35 +1,86 @@
+//const notAlpha = /[^a-z]+/gi,
+//      alphaLength = 26;
+//
+//
+//export default class Pangram {
+//
+//  constructor (candidate){
+//    const cleaned = (candidate.replace(notAlpha,'')).toLowerCase();
+//    this.unique = new Set([...cleaned]);
+//  }
+//
+//  isPangram (){
+//    return this.unique.size === alphaLength;
+//  }
+//}
+
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
+var alphabet = 'abcdefghijklmnopqrstuvwxyz';
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+var Pangram = function Pangram(sentence) {
+  var sentence = sentence;
+  var containedLetters = Object.create(null);
+  this.isPangramValue = true;
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } }
+  // generate a list of contained letters
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+  try {
+    for (var _iterator = sentence.toLocaleLowerCase()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      var l = _step.value;
 
-var notAlpha = /[^a-z]+/gi,
-    alphaLength = 26;
+      containedLetters[l] = null;
+    }
 
-var Pangram = (function () {
-  function Pangram(candidate) {
-    _classCallCheck(this, Pangram);
-
-    var cleaned = candidate.replace(notAlpha, '').toLowerCase();
-    this.unique = new Set([].concat(_toConsumableArray(cleaned)));
+    // check if all letters of alphabet present in sentence
+  } catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion && _iterator['return']) {
+        _iterator['return']();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
   }
 
-  _createClass(Pangram, [{
-    key: 'isPangram',
-    value: function isPangram() {
-      return this.unique.size === alphaLength;
+  var _iteratorNormalCompletion2 = true;
+  var _didIteratorError2 = false;
+  var _iteratorError2 = undefined;
+
+  try {
+    for (var _iterator2 = alphabet[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+      var l = _step2.value;
+
+      if (!(l in containedLetters)) {
+        this.isPangramValue = false;
+      }
     }
-  }]);
+  } catch (err) {
+    _didIteratorError2 = true;
+    _iteratorError2 = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion2 && _iterator2['return']) {
+        _iterator2['return']();
+      }
+    } finally {
+      if (_didIteratorError2) {
+        throw _iteratorError2;
+      }
+    }
+  }
+};
 
-  return Pangram;
-})();
+Pangram.prototype.isPangram = function () {
+  return this.isPangramValue;
+};
 
-exports['default'] = Pangram;
-module.exports = exports['default'];
+module.exports = Pangram;

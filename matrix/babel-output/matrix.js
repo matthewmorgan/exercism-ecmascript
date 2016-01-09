@@ -1,30 +1,61 @@
+//export default function (input) {
+//  this.columns = [];
+//  this.rows = input.split('\n')
+//      .map(row => {
+//        return row.split(' ')
+//            .reduce((prev, curr) => {
+//              prev.push(+curr);
+//              return prev;
+//            }, []);
+//      });
+//
+//  for (let ci = 0; ci < this.rows.length; ci++) {
+//    this.columns[ci] = [];
+//    this.rows.forEach(row => {
+//      this.columns[ci].push(row[ci]);
+//    });
+//  }
+//}
+//
+//
+//
+
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
-exports['default'] = function (input) {
-  var _this = this;
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-  this.columns = [];
-  this.rows = input.split('\n').map(function (row) {
-    return row.split(' ').reduce(function (prev, curr) {
-      prev.push(+curr);
-      return prev;
-    }, []);
-  });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-  var _loop = function (ci) {
-    _this.columns[ci] = [];
-    _this.rows.forEach(function (row) {
-      _this.columns[ci].push(row[ci]);
+var Matrix = (function () {
+  function Matrix(str) {
+    _classCallCheck(this, Matrix);
+
+    this.rows = str.split('\n').map(function (r) {
+      return r.split(/\s+/).map(function (i) {
+        return Number(i);
+      });
     });
-  };
-
-  for (var ci = 0; ci < this.rows.length; ci++) {
-    _loop(ci);
   }
-};
 
+  _createClass(Matrix, [{
+    key: 'columns',
+    get: function get() {
+      var _this = this;
+
+      return this.rows[0].map(function (col, i) {
+        return _this.rows.map(function (row) {
+          return row[i];
+        });
+      });
+    }
+  }]);
+
+  return Matrix;
+})();
+
+exports['default'] = Matrix;
 module.exports = exports['default'];

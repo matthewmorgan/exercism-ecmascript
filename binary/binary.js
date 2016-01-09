@@ -1,7 +1,8 @@
-export default function(binary) {
+export default binary =>  {
   const b = binary.match(/[^01]/) ? '0' : binary;
   return {
-    toDecimal: () => [...b].reduce((acc, curr) => acc*2 + parseInt(curr),0)
+    toDecimal: () => [...b].reduce((dec, bin) => dec*2 + parseInt(bin),0)
   };
 };
+
 

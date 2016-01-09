@@ -1,7 +1,6 @@
 const notAlpha = /[^a-z]+/gi,
       alphaLength = 26;
 
-
 export default class Pangram {
 
   constructor (candidate){
