@@ -6,4 +6,6 @@ const ROMANS = {
 };
 
 export default decimal => [...decimal.toString()]
-        .reduce((prev, current, ii, original) => prev+ROMANS[Math.pow(10, original.length-1-ii)][+current], '')
+        .reduce((total, current, power) => {
+          if ()
+        }, 0)
