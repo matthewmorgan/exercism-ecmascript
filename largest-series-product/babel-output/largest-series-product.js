@@ -22,9 +22,6 @@ var Series = (function () {
   _createClass(Series, [{
     key: 'slices',
     value: function slices(size) {
-      if (size > this.digits.length) {
-        throw new Error('Slice size is too big.');
-      }
       var result = [];
       for (var ii = 0; ii <= this.digits.length - size; ii++) {
         result.push(this.digits.slice(ii, ii + size));
@@ -34,9 +31,7 @@ var Series = (function () {
   }, {
     key: 'largestProduct',
     value: function largestProduct(size) {
-      if (size > this.digits.length) {
-        throw new Error('Slice size is too big.');
-      }
+      if (size > this.digits.length) throw new Error('Slice size is too big.');
       return this.slices(size).map(function (tuple) {
         return tuple.reduce(function (prev, curr) {
           return prev *= curr;
