@@ -1,16 +1,18 @@
-let targetWord = '';
-let sortedWord = '';
-let sortChars =(str) => str.toLowerCase().split('').sort().join('');
-let match = (possible) => targetWord !== possible.toLowerCase() && (sortedWord === sortChars(possible));
-let matches = (possibles) => possibles.filter(match);
+let targetWord, sortedWord;
 
-export default (word) => {
+export default word => {
   targetWord = word;
   sortedWord = sortChars(targetWord);
   return {
     matches: (possibles, ...more) => {
       Array.isArray(possibles) ? more = more.concat(possibles) : more.push(possibles);
-      return matches(more)
+      return matches(more);
     }
   }
 }
+
+const sortChars = str => [...str.toLowerCase()].sort().join('');
+const matches= possibles => possibles.filter(match);
+const match = possible => targetWord !== possible.toLowerCase()
+                          && (sortedWord === sortChars(possible));
+

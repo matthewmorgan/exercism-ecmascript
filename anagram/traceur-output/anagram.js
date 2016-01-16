@@ -1,21 +1,8 @@
 "use strict";
 var $__1;
 $traceurRuntime.options.symbols = true;
-var targetWord = '';
-var sortedWord = '';
-var sortChars = $traceurRuntime.initTailRecursiveFunction(function(str) {
-  return $traceurRuntime.call(function(str) {
-    return ($__1 = str.toLowerCase().split('').sort(), $traceurRuntime.continuation($__1.join, $__1, ['']));
-  }, this, arguments);
-});
-var match = function(possible) {
-  return targetWord !== possible.toLowerCase() && (sortedWord === sortChars(possible));
-};
-var matches = $traceurRuntime.initTailRecursiveFunction(function(possibles) {
-  return $traceurRuntime.call(function(possibles) {
-    return $traceurRuntime.continuation(possibles.filter, possibles, [match]);
-  }, this, arguments);
-});
+var targetWord,
+    sortedWord;
 var $__default = function(word) {
   targetWord = word;
   sortedWord = sortChars(targetWord);
@@ -28,6 +15,19 @@ var $__default = function(word) {
         return $traceurRuntime.continuation(matches, null, [more]);
       }, this, arguments);
     })};
+};
+var sortChars = $traceurRuntime.initTailRecursiveFunction(function(str) {
+  return $traceurRuntime.call(function(str) {
+    return ($__1 = $traceurRuntime.spread(str.toLowerCase()).sort(), $traceurRuntime.continuation($__1.join, $__1, ['']));
+  }, this, arguments);
+});
+var matches = $traceurRuntime.initTailRecursiveFunction(function(possibles) {
+  return $traceurRuntime.call(function(possibles) {
+    return $traceurRuntime.continuation(possibles.filter, possibles, [match]);
+  }, this, arguments);
+});
+var match = function(possible) {
+  return targetWord !== possible.toLowerCase() && (sortedWord === sortChars(possible));
 };
 Object.defineProperties(module.exports, {
   default: {get: function() {
