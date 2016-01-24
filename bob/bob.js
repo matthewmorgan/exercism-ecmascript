@@ -1,24 +1,19 @@
-'use strict';
+const isSilent = input => input.trim().length < 1;
+const isShouting = input => (input.toUpperCase() === input) && (/[A-Z]+/).test(input);
+const isQuestion = input => input.charAt(input.length - 1) === '?';
+const other = input => true;
 
-let isSilent = (input) => input.trim().length < 1;
-let isShouting = (input) =>  (input.toUpperCase() === input) && (/[A-Z]+/).test(input);
-let isQuestion = (input) => input.charAt(input.length - 1) === '?';
 
-let responses = {
-  4: 'Fine. Be that way!',
-  2: 'Whoa, chill out!',
-  1: 'Sure.',
-  0: 'Whatever.'
-}
+const teenageBrain = [
+  {adult: isSilent, andResponds: 'Fine. Be that way!'},
+  {adult: isShouting, andResponds:  'Whoa, chill out!'},
+  {adult: isQuestion, andResponds: 'Sure.'},
+  {adult: other, andResponds: 'Whatever.'}
+];
 
-export default class Bob {
-  hey (input) {
-    return responses[
-        Math.max(
-            isSilent(input) << 2,
-            isShouting(input) << 1,
-            isQuestion(input) << 0
-        )
-        ];
-  }
-}
+teenageBrain.hears = Array.prototype.find;
+
+export default () => ({
+  hey: speaks => teenageBrain
+      .hears(when => when.adult(speaks)).andResponds
+})
