@@ -1,6 +1,6 @@
 export default class Search {
   constructor(data) {
-    isSorted(data) ? this.array = data : {};
+    if (isSorted(data)) this.array = data;
   }
 
   indexOf(target, lower = 0, upper = this.array.length - 1) {
@@ -14,5 +14,8 @@ export default class Search {
   }
 }
 
-const isSorted = arr => arr.every((el, ii) => ii === 0 || el >= arr[ii - 1]);
+function isSorted(arr) {
+  return arr
+      .every((el, ii) => ii === 0 || el >= arr[ii - 1])
+}
 

@@ -1,49 +1,44 @@
 let buffer, bufferMax;
 
-const BufferEmptyException = () => ({
-  name: "buffer empty exception!",
-  message: "can't read from an empty buffer!"
-});
-
-const BufferFullException = () => ({
-  name: "buffer full exception!",
-  message: "can't write to a full buffer!"
-});
-
-const read = () => {
-  if (buffer.length === 0){
-    throw (BufferEmptyException());
+function bufferEmptyException() {
+  return {
+    name:    "buffer empty exception!",
+    message: "can't read from an empty buffer!"
   }
-  return buffer.splice(0,1)[0];
-};
+}
 
-const write = (value) => {
+function bufferFullException () {
+  return {
+    name:    "buffer full exception!",
+    message: "can't write to a full buffer!"
+  }
+}
+
+function read (){
+  if (buffer.length === 0) {
+    throw bufferEmptyException();
+  }
+  return buffer.shift();
+}
+
+function write(value){
   if (buffer.length === bufferMax){
-    throw (BufferFullException())
+    throw bufferFullException();
   }
-  value ? buffer.push(value) : null;
-};
+  if (value) buffer.push(value);
+}
 
-const forceWrite = (value) => {
-  if (buffer.length === bufferMax){
-    read();
-  }
+function forceWrite(value){
+  if (buffer.length === bufferMax) read();
   write(value);
-};
+}
 
-const clear = () => buffer = [];
+function clear () { buffer = [] }
 
-const CircularBuffer = (capacity) => {
+function CircularBuffer (capacity) {
   buffer = [];
   bufferMax = capacity;
-  return {
-    read: read,
-    write: write,
-    forceWrite: forceWrite,
-    clear: clear
-  }
-};
+  return { read, write, forceWrite, clear };
+}
 
-export { CircularBuffer as default };
-export { BufferFullException as bufferFullException };
-export { BufferEmptyException as bufferEmptyException };
+export { CircularBuffer as default, bufferFullException, bufferEmptyException };

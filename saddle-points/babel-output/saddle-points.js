@@ -4,7 +4,20 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+exports["default"] = function (data) {
+  var _transposeMatrix = transposeMatrix(data);
+
+  var rows = _transposeMatrix.rows;
+  var columns = _transposeMatrix.columns;
+
+  var _findMinMax = findMinMax(rows, columns);
+
+  var rowMaxs = _findMinMax.rowMaxs;
+  var colMins = _findMinMax.colMins;
+
+  var saddlePoints = findSaddlePoints(rows, rowMaxs, colMins);
+  return { rows: rows, columns: columns, saddlePoints: saddlePoints };
+};
 
 function findSaddlePoints(rows, rowMaxs, colMins) {
   return rows.reduce(function (saddlePoints, row, rowIndex) {
@@ -17,28 +30,25 @@ function findSaddlePoints(rows, rowMaxs, colMins) {
   }, []);
 }
 
-var Matrix = function Matrix(data) {
-  var _this = this;
-
-  _classCallCheck(this, Matrix);
-
-  this.rows = [];
-  this.columns = [];
+function transposeMatrix(data) {
+  var rows = [];
+  var columns = [];
   data.split(/\n/).map(function (row) {
-    _this.rows.push(row.trim().split(/\s/).map(function (cell, jj) {
-      _this.columns[jj] ? _this.columns[jj].push(+cell) : _this.columns[jj] = [+cell];
+    rows.push(row.trim().split(/\s/).map(function (cell, jj) {
+      columns[jj] = (columns[jj] || []).concat(+cell);
       return +cell;
     }));
   });
+  return { rows: rows, columns: columns };
+}
 
-  var rowMaxs = this.rows.map(function (row) {
+function findMinMax(rows, columns) {
+  var rowMaxs = rows.map(function (row) {
     return Math.max.apply(null, row);
   });
-  var colMins = this.columns.map(function (col) {
+  var colMins = columns.map(function (col) {
     return Math.min.apply(null, col);
   });
-  this.saddlePoints = findSaddlePoints(this.rows, rowMaxs, colMins);
-};
-
-exports["default"] = Matrix;
+  return { rowMaxs: rowMaxs, colMins: colMins };
+}
 module.exports = exports["default"];

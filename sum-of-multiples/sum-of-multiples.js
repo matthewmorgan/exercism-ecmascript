@@ -1,19 +1,21 @@
-const Sum = (factors = [3, 5]) => {
-  let self = this instanceof Sum ? this : Object.getPrototypeOf(Sum);
-  self.factors = factors;
+export default (factors = [3, 5]) => {
 
-  self.to = limit => {
-    let multiples = {};
-    self.factors
-        .forEach(factor => {
-          for (let ii = factor; ii < limit; ii += factor) {
-            multiples[ii] = ii;
-          }
-        });
-    return Object.keys(multiples)
-        .reduce((prev, curr) => prev += multiples[curr], 0);
-  };
-  return self;
+  return Object.freeze({factors, to});
+
+  function to(limit) {
+    return factors.reduce((sum, factor) => {
+      [...range(factor, limit, factor)]
+      .map(multiple => {
+        multiples.add(multiple);
+      },0);
+    });
+
+    return sum;
+  }
 };
 
-export default Sum;
+function *range(curr, end, step) {
+  if (curr >= end) return;
+  yield curr;
+  yield *range(curr += step, end, step);
+}

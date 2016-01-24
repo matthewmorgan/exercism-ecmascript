@@ -12,13 +12,13 @@ let responses = {
 }
 
 export default class Bob {
-    hey (input) {
-      return responses[
-          Math.max(
-              isSilent(input) << 2,
-              isShouting(input) << 1,
-              isQuestion(input) << 0
-          )
-      ];
-    }
+  hey (input) {
+    return responses[
+        Math.max(
+            isSilent(input) << 2,
+            isShouting(input) << 1,
+            isQuestion(input) << 0
+        )
+        ];
+  }
 }

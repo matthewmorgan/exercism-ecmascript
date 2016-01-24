@@ -1,3 +1,10 @@
+export default function(data) {
+  const { rows, columns } = transposeMatrix(data);
+  const { rowMaxs, colMins } = findMinMax(rows, columns);
+  const saddlePoints = findSaddlePoints(rows, rowMaxs, colMins);
+  return {rows, columns, saddlePoints};
+}
+
 function findSaddlePoints(rows, rowMaxs, colMins) {
   return rows.reduce((saddlePoints, row, rowIndex) => {
     row.forEach((cell, colIndex) => {
@@ -9,19 +16,22 @@ function findSaddlePoints(rows, rowMaxs, colMins) {
   }, []);
 }
 
-export default class Matrix {
-  constructor(data) {
-    this.rows = [];
-    this.columns = [];
-    data.split(/\n/).map(row => {
-      this.rows.push(row.trim().split(/\s/).map((cell, jj) => {
-        this.columns[jj] ? this.columns[jj].push(+cell) : this.columns[jj] = [+cell];
-        return +cell;
-      }));
-    });
-
-    const rowMaxs = this.rows.map(row => Math.max.apply(null, row));
-    const colMins = this.columns.map(col => Math.min.apply(null, col));
-    this.saddlePoints = findSaddlePoints(this.rows, rowMaxs, colMins);
-  }
+function transposeMatrix(data){
+  const rows = [];
+  const columns = [];
+  data.split(/\n/).map(row => {
+    rows.push(row.trim().split(/\s/).map((cell, jj) => {
+      columns[jj] = (columns[jj] || []).concat(+cell);
+      return +cell;
+    }));
+  });
+  return {rows, columns};
 }
+
+function findMinMax(rows, columns){
+  const rowMaxs = rows.map(row => Math.max.apply(null, row));
+  const colMins = columns.map(col => Math.min.apply(null, col));
+  return { rowMaxs, colMins };
+}
+
+

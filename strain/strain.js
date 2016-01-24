@@ -1,7 +1,7 @@
 const getMatches = (doesMatch, db, filter) => {
   const matches = [];
   for (let ii = 0; ii < db.length; ii++) {
-    doesMatch === filter(db[ii]) ? matches.push(db[ii]) : {};
+    filter(db[ii]) === doesMatch && matches.push(db[ii]);
   }
   return matches;
 };

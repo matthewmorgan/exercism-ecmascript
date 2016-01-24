@@ -8,6 +8,12 @@ var _createClass = (function () { function defineProperties(target, props) { for
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
+var drops = {
+  3: 'Pling',
+  5: 'Plang',
+  7: 'Plong'
+};
+
 var Raindrops = (function () {
   function Raindrops() {
     _classCallCheck(this, Raindrops);
@@ -16,15 +22,11 @@ var Raindrops = (function () {
   _createClass(Raindrops, [{
     key: 'convert',
     value: function convert(num) {
-      var drops = {
-        3: 'Pling',
-        5: 'Plang',
-        7: 'Plong'
-      };
-
-      return Object.keys(drops).reduce(function (prev, curr) {
-        return prev += num % curr === 0 ? drops[curr] : '';
-      }, '') || num.toString();
+      return Object.keys(drops).filter(function (key) {
+        return num % key === 0;
+      }).map(function (key) {
+        return drops[key];
+      }).join('') || num.toString();
     }
   }]);
 

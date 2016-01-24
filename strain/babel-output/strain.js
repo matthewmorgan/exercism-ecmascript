@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 var getMatches = function getMatches(doesMatch, db, filter) {
   var matches = [];
   for (var ii = 0; ii < db.length; ii++) {
-    doesMatch === filter(db[ii]) ? matches.push(db[ii]) : {};
+    filter(db[ii]) === doesMatch && matches.push(db[ii]);
   }
   return matches;
 };
