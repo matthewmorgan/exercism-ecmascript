@@ -1,23 +1,16 @@
-export default limit => {
-  let p = 2;
-  const range = [],
-      primes = [];
-  for (let ii = 2; ii <= limit; ii++) {
-    range[ii] = {val: ii, prime: true};
-  }
-  ;
-  for (let ii = 2; ii <= limit / 2; ii++) {
-    for (let jj = 2 * p; jj <= limit; jj += p) {
-      range[jj].prime = false;
-    }
-    p++;
-  }
-  for (let key in range) {
-    range[key].prime ? primes.push(+key) : null;
-  }
-  return {
-    primes: primes
-  };
-};
+export default (limit) => ({
+  primes: [...range(2, limit)]
+              .filter(number => isPrime(number))
+})
 
+function isPrime(number) {
+  return [...range(2, number / 2)]
+          .filter(possibleFactor => number % possibleFactor === 0)
+          .length === 0;
+}
 
+function *range(curr, limit) {
+  if (curr > limit) return;
+  yield curr;
+  yield *range(curr += 1, limit)
+}
