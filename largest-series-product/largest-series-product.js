@@ -3,20 +3,23 @@ export default class Series {
     this.digits = [...numString]
         .map(digit => +digit);
   }
+
   slices(size) {
-    const result = [];
-    for (let ii = 0; ii <= this.digits.length - size; ii++) {
-      result.push(this.digits.slice(ii, ii + size));
-    }
-    return result;
+    return this.digits.reduce((container, _, i) => {
+          i + size <= this.digits.length &&
+            container.push({begin: i, end: i + size});
+          return container;
+        }, [])
   }
+
   largestProduct(size) {
     if (size > this.digits.length) {
       throw new Error('Slice size is too big.');
     }
     return this.slices(size)
-        .map(tuple => tuple
-            .reduce((prev, curr) => prev *= curr, 1), [])
-        .sort((a, b) => b - a)[0];
+        .map(bounds => this.digits.slice(bounds.begin, bounds.end)
+            .reduce((product, factor) => product *= factor, 1)
+        )
+        .sort((a, b) => b - a)[0] || 1;
   }
 }

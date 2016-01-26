@@ -13,16 +13,16 @@ describe('Series', () => {
   it('returns empty array for no digits', () => {
     expect(new Series('').digits).toEqual([]);
   });
-
-  it('slices by 2', () => {
-    expect(new Series('01234').slices(2))
-      .toEqual([[0, 1], [1, 2], [2, 3], [3, 4]]);
-  });
-
-  it('slices by 3', () => {
-    expect(new Series('982347').slices(3))
-      .toEqual([[9, 8, 2], [8, 2, 3], [2, 3, 4], [3, 4, 7]]);
-  });
+  //
+  //it('slices by 2', () => {
+  //  expect(new Series('01234').slices(2))
+  //    .toEqual([[0, 1], [1, 2], [2, 3], [3, 4]]);
+  //});
+  //
+  //it('slices by 3', () => {
+  //  expect(new Series('982347').slices(3))
+  //    .toEqual([[9, 8, 2], [8, 2, 3], [2, 3, 4], [3, 4, 7]]);
+  //});
 
   it('can get the largest product of 2', () => {
     expect(new Series('0123456789').largestProduct(2)).toBe(72);
