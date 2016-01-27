@@ -25,15 +25,21 @@ function write(value){
   if (buffer.length === bufferMax){
     throw bufferFullException();
   }
-  if (value) buffer.push(value);
+  if (isValid(value)) buffer.push(value);
 }
 
 function forceWrite(value){
-  if (buffer.length === bufferMax) read();
-  write(value);
+  if (isValid(value)) {
+    if (buffer.length === bufferMax) read();
+    buffer.push(value);
+  }
 }
 
-function clear () { buffer = [] }
+function isValid(value){
+  return value !== undefined && value !== null;
+}
+
+function clear () { buffer.length = 0 }
 
 function CircularBuffer (capacity) {
   buffer = [];
