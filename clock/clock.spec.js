@@ -52,9 +52,9 @@ describe('Clock', () => {
     expect(clock1.equals(clock2)).toBe(false);
   });
 
-  //it('wraps around midnight backwards',  () => {
-  //  const clock = Clock(0, 3).minus(4);
-  //  expect(clock.toString()).toEqual('23:59');
-  //});
+  it('wraps around midnight backwards',  () => {
+    const clock = Clock(0, 3).minus(4);
+    expect(clock.toString()).toEqual('23:59');
+  });
 
 });
