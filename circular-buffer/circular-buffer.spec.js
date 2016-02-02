@@ -54,7 +54,26 @@ describe('CircularBuffer', () => {
     buffer.write('3');
     expect(buffer.read()).toBe('2');
     expect(buffer.read()).toBe('3');
+
+    const first = circularBuffer(3);
+    first.write(1);
+    first.write(2);
+    first.write(3);
+
+    const second = circularBuffer(2);
+    second.write(7);
+    second.write(8);
+    console.log('first ',first.read()); //returns 1
+    console.log('second ',second.read()); //returns 1
+
   });
+
+  //it('has different buffers for different buffers', ()=> {
+  //
+  //
+  //
+  //
+  //});
 
   it('writes of undefined or null don\'t occupy buffer', () => {
     const buffer = circularBuffer(3);

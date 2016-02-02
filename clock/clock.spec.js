@@ -32,12 +32,27 @@ describe('Clock', () => {
     expect(clock.toString()).toEqual('10:00');
   });
 
+  it('wraps around at exactly midnight', () => {
+    const clock = Clock(0, 0).plus(1440);
+    expect(clock.toString()).toEqual('00:00');
+  });
+
   it('can subtract over an hour',  () => {
     const clock = Clock(10, 3).minus(30);
     expect(clock.toString()).toEqual('09:33');
 
     const clock2 = Clock(10, 3).minus(70);
     expect(clock2.toString()).toEqual('08:53');
+  });
+
+  it('can subtract a day and a half',  () => {
+    const clock = Clock(10, 3).minus(2160);
+    expect(clock.toString()).toEqual('22:03');
+  });
+
+  it('can add a day and a half',  () => {
+    const clock = Clock(10, 3).plus(2160);
+    expect(clock.toString()).toEqual('22:03');
   });
 
   it('can know if it\'s equal to another clock',  () => {

@@ -1,5 +1,3 @@
-let buffer, bufferMax;
-
 function bufferEmptyException() {
   return {
     name:    "buffer empty exception!",
@@ -7,44 +5,47 @@ function bufferEmptyException() {
   }
 }
 
-function bufferFullException () {
+function bufferFullException() {
   return {
     name:    "buffer full exception!",
     message: "can't write to a full buffer!"
   }
 }
 
-function read (){
-  if (buffer.length === 0) {
-    throw bufferEmptyException();
+function CircularBuffer(capacity) {
+  let buffer = [];
+  let bufferMax = capacity;
+
+  return {read, write, forceWrite, clear};
+
+  function read() {
+    if (buffer.length === 0) {
+      throw bufferEmptyException();
+    }
+    return buffer.shift();
   }
-  return buffer.shift();
-}
 
-function write(value){
-  if (buffer.length === bufferMax){
-    throw bufferFullException();
+  function write(value) {
+    if (buffer.length === bufferMax) {
+      throw bufferFullException();
+    }
+    if (isValid(value)) buffer.push(value);
   }
-  if (isValid(value)) buffer.push(value);
-}
 
-function forceWrite(value){
-  if (isValid(value)) {
-    if (buffer.length === bufferMax) read();
-    buffer.push(value);
+  function forceWrite(value) {
+    if (isValid(value)) {
+      if (buffer.length === bufferMax) read();
+      buffer.push(value);
+    }
   }
-}
 
-function isValid(value){
-  return value !== undefined && value !== null;
-}
+  function isValid(value) {
+    return value !== undefined && value !== null;
+  }
 
-function clear () { buffer.length = 0 }
-
-function CircularBuffer (capacity) {
-  buffer = [];
-  bufferMax = capacity;
-  return { read, write, forceWrite, clear };
+  function clear() {
+    buffer.length = 0
+  }
 }
 
 export { CircularBuffer as default, bufferFullException, bufferEmptyException };
