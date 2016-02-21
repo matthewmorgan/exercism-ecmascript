@@ -49,7 +49,7 @@ gulp.task('lint', function () {
         // Possible errors
         'comma-dangle': [2, 'never'], // don't let a comma at the end of object properties or array element
         'no-cond-assign': [2, 'always'], // no assignments in conditional statements
-        'no-console': 2,  // no console.log() statements in production code
+        //'no-console': 2,  // no console.log() statements in production code
         'no-constant-condition': 2, // no constants in conditional statements
         'no-control-regex': 2,  // no control characters in regex's
         'no-debugger': 2, // no debugger in productin code

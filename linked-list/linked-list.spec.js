@@ -76,4 +76,32 @@ describe('LinkedList', () => {
     list.delete(20);
     expect(list.count()).toBe(1);
   });
+
+  it('deleteKthFromEnd removes the kth element from the end', ()=>{
+    const list = new LinkedList();
+    list.push(10);
+    list.push(30);
+    list.push(40);
+    list.push(50);
+    list.push(60);
+    list.deleteKthFromEnd(1);
+    expect(list.count()).toBe(5);
+    expect(list.pop()).toBe(60);
+  })
+
+  it('removeDupes removes duplicates from the list', ()=>{
+    const list = new LinkedList();
+    list.push(10);
+    list.push(10);
+    list.push(10);
+    list.push(30);
+    list.push(40);
+    list.push(40);
+    list.push(30);
+    list.push(50);
+    expect(list.count()).toBe(8);
+
+    list.removeDupes();
+    expect(list.count()).toBe(4);
+  })
 });

@@ -1,26 +1,26 @@
-let sides;
 const TRIANGLE_KINDS = {1: 'equilateral', 2: 'isosceles', 3: 'scalene'};
 
-const throwOnIllegalSides = () => {
-  if (sides.some(side => side <= 0 )) throw new Error('Side lengths must be positive!');
-};
+const numerically = (a,b) => a-b;
 
-const throwOnViolatesInequality = () => {
-  if (sides[2] > (sides[0] + sides[1])) throw new Error('Sum of two sides must exceed third side!');
-};
-
-
-export default class Triangle {
-
+export default class {
   constructor(...args) {
-    sides = args.sort();
+    this.sides = args.sort(numerically);
   }
 
   kind() {
-    throwOnIllegalSides();
-    throwOnViolatesInequality();
-    const uniqueSideCount = (new Set(sides)).size;
+    this.throwOnIllegalSides();
+    this.throwOnViolatesInequality();
+    const uniqueSideCount = (new Set(this.sides)).size;
     return TRIANGLE_KINDS[uniqueSideCount];
   }
 
+  throwOnIllegalSides() {
+    if (this.sides.some(side => side <= 0 ))
+      throw new Error('Side lengths must be positive!');
+  }
+
+  throwOnViolatesInequality(){
+    if (this.sides[2] > (this.sides[0] + this.sides[1]))
+      throw new Error('Sum of two sides must exceed third side!');
+  }
 }

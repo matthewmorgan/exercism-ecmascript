@@ -75,4 +75,30 @@ export default class Deque {
       }
     }
   }
+
+  deleteKthFromEnd(k) {
+    let element = this.head;
+    let runner = this.head;
+    let idx = 0;
+    while (idx<k && element.prev){
+      element = element.prev;
+      idx++;
+    }
+    if (idx < k) { /*no-op*/ }
+    while(element.prev){
+      element = element.prev;
+      runner = runner.prev;
+    }
+    this.delete(runner);
+  }
+
+  removeDupes(){
+    const found = new Set();
+    let element = this.head;
+    while(element.prev){
+      found.add(element.value);
+      element = element.prev;
+      if (found.has(element.value)) this.delete(element.value);
+    }
+  }
 }

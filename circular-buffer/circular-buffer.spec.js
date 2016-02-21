@@ -17,6 +17,18 @@ describe('CircularBuffer', () => {
     expect(buffer.read).toThrow(bufferEmptyException());
   });
 
+  it('write and read back multiple items', function() {
+    var buffer = circularBuffer(3);
+    buffer.write(0);
+    buffer.write(1);
+    buffer.write(2);
+    expect(buffer.read()).toBe(0);
+    expect(buffer.read()).toBe(1);
+    expect(buffer.read()).toBe(2);
+    expect(buffer.read).toThrow(bufferEmptyException());
+  });
+
+
   it('write and read back multiple items', () => {
     const buffer = circularBuffer(2);
     buffer.write('1');
@@ -64,16 +76,8 @@ describe('CircularBuffer', () => {
     second.write(7);
     second.write(8);
     console.log('first ',first.read()); //returns 1
-    console.log('second ',second.read()); //returns 1
 
   });
-
-  //it('has different buffers for different buffers', ()=> {
-  //
-  //
-  //
-  //
-  //});
 
   it('writes of undefined or null don\'t occupy buffer', () => {
     const buffer = circularBuffer(3);

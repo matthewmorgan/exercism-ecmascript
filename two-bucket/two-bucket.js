@@ -1,14 +1,13 @@
-export default class TwoBucket {
+export default class {
   constructor(cap1, cap2, goal, goalBucket) {
-    const self = this;
-    self.goalBucket = goalBucket;
-    self.goal = goal;
-    self.count = 1;
-    self.one = {contains: cap1, capacity: cap1};
-    self.two = {contains: 0, capacity: cap2};
+    this.goalBucket = goalBucket;
+    this.goal = goal;
+    this.count = 1;
+    this.one = {contains: cap1, capacity: cap1};
+    this.two = {contains: 0, capacity: cap2};
     if (goalBucket === 'two') {
-      self.one = {contains: cap2, capacity: cap2};
-      self.two = {contains: 0, capacity: cap1};
+      this.one = {contains: cap2, capacity: cap2};
+      this.two = {contains: 0, capacity: cap1};
     }
   }
 
@@ -32,4 +31,3 @@ export default class TwoBucket {
     return ++this.count;
   }
 }
-      
