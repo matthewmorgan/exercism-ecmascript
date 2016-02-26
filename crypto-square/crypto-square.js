@@ -1,14 +1,13 @@
 export default class Crypto {
   constructor(phrase) {
-    this.phrase = phrase;
+    this.phrase = phrase.toLowerCase();
     this.squareSize = calculateSquareSize(this.normalizePlaintext(this.phrase));
     this.ciphertext = () => getCipherText(this.plaintextSegments(), this.squareSize);
     this.size = () => this.squareSize;
   }
 
   plaintextSegments(){
-    const normalized = this.normalizePlaintext(this.phrase);
-    return getSegments(normalized, this.squareSize);
+    return getSegments(this.normalizePlaintext(this.phrase), this.squareSize);
   }
 
   normalizeCipherText(){
@@ -16,7 +15,7 @@ export default class Crypto {
   }
 
   normalizePlaintext(){
-    return this.phrase.toLowerCase().replace(/[\W]/g, '');
+    return this.phrase.replace(/[\W]/g, '');
   }
 }
 
