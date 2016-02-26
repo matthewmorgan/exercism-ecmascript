@@ -3,10 +3,7 @@ export default class Crypto {
     this.phrase = phrase;
     this.squareSize = calculateSquareSize(this.normalizePlaintext(this.phrase));
     this.ciphertext = () => getCipherText(this.plaintextSegments(), this.squareSize);
-  }
-
-  size(){
-    return this.squareSize;
+    this.size = () => this.squareSize;
   }
 
   plaintextSegments(){
