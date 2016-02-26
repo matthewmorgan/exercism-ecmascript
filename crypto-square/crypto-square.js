@@ -1,21 +1,18 @@
-let normalizedSize;
-
 export default class Crypto {
 
   constructor(phrase) {
     this.phrase = phrase;
-    this.squareSize = calculateSquareSize(this.phrase);
-    normalizedSize = calculateSquareSize(this.normalizePlaintext(this.phrase));
+    this.squareSize = calculateSquareSize(this.normalizePlaintext(this.phrase));
     this.ciphertext = () => getCipherText(this.plaintextSegments(), this.squareSize);
   }
 
   size(){
-    return normalizedSize;
+    return this.squareSize;
   }
 
   plaintextSegments(){
     const normalized = this.normalizePlaintext(this.phrase);
-    return getSegments(normalized, normalizedSize);
+    return getSegments(normalized, this.squareSize);
   }
 
   normalizeCipherText(){
