@@ -1,5 +1,4 @@
 export default class Crypto {
-
   constructor(phrase) {
     this.phrase = phrase;
     this.squareSize = calculateSquareSize(this.normalizePlaintext(this.phrase));
@@ -22,7 +21,6 @@ export default class Crypto {
   normalizePlaintext(){
     return this.phrase.toLowerCase().replace(/[\W]/g, '');
   }
-
 }
 
 function calculateSquareSize(str){
