@@ -29,11 +29,11 @@ describe('A leap year', () => {
       expect(isLeapYear(1992)).toBeTruthy();
     });
 
-    xit('is skipped every 100 years', () => {
+    it('is skipped every 100 years', () => {
       expect(isLeapYear(2100)).toBeFalsy();
     });
 
-    xit('is reintroduced every 400 years', () => {
+    it('is reintroduced every 400 years', () => {
       expect(isLeapYear(2400)).toBeTruthy();
     });
 
