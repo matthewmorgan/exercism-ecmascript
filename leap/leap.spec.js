@@ -14,7 +14,7 @@ describe('A leap year', () => {
     expect(isLeapYear(1900)).toBeFalsy();
   });
 
-  xit('is reintroduced every 400 years to adjust another day', () => {
+  it('is reintroduced every 400 years to adjust another day', () => {
     expect(isLeapYear(2000)).toBeTruthy();
   });
 
