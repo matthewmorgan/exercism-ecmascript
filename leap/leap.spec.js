@@ -10,7 +10,7 @@ describe('A leap year', () => {
     expect(isLeapYear(2016)).toBeTruthy();
   });
 
-  xit('is skipped every 100 years to remove an extra day', () => {
+  it('is skipped every 100 years to remove an extra day', () => {
     expect(isLeapYear(1900)).toBeFalsy();
   });
 
