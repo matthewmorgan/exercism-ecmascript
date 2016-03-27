@@ -8,6 +8,10 @@ function recordAllData(bst) {
   return out;
 }
 
+function displayAllData(bst) {
+  bst.each(data => console.log(data));
+}
+
 describe('BinarySearchTree', () => {
 
   it('data is retained', () => {
@@ -84,6 +88,9 @@ describe('BinarySearchTree', () => {
     four.insert(5);
 
     expect(recordAllData(four)).toEqual([ 1, 2, 3, 4, 5, 6, 7 ]);
+    // displayAllData(four);
+    // four.traverseDepthFirst();
+    four.traverseBreadthFirst(four);
   });
 
 });

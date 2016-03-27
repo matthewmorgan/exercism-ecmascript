@@ -25,7 +25,7 @@ describe('A leap year', () => {
       expect(isLeapYear(1978)).toBeFalsy();
     });
 
-    xit('is a common leap year', () => {
+    it('is a common leap year', () => {
       expect(isLeapYear(1992)).toBeTruthy();
     });
 
