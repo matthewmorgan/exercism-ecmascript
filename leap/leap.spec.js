@@ -6,7 +6,7 @@ describe('A leap year', () => {
     expect(isLeapYear(2015)).toBeFalsy();
   });
 
-  xit('is introduced every 4 years to adjust about a day', () => {
+  it('is introduced every 4 years to adjust about a day', () => {
     expect(isLeapYear(2016)).toBeTruthy();
   });
 
