@@ -4,7 +4,6 @@ function Element(value) {
 
 export default class Deque {
   constructor() {
-    this.size = 0;
     this.head = null;
     this.tail = null;
   }
@@ -14,7 +13,14 @@ export default class Deque {
       return undefined;
     }
     const result = this.head.value;
-    this.head = this.head.prev;
+
+    if (this.head.prev) {
+      this.head = this.head.prev;
+      this.head.next = null;
+    } else {
+      this.head = null;
+      this.tail = null;
+    }
     return result;
   }
 
@@ -31,9 +37,17 @@ export default class Deque {
   }
 
   shift() {
-    this.tail.next ? this.tail.next.prev = null : {};
+    if (!this.tail) {
+      return undefined;
+    }
     const value = this.tail.value;
-    this.tail = this.tail.next;
+    if (this.tail.next){
+      this.tail = this.tail.next;
+      this.tail.next = null
+    } else {
+      this.tail = null;
+      this.head = null;
+    }
     return value;
   }
 
@@ -80,22 +94,23 @@ export default class Deque {
     let element = this.head;
     let runner = this.head;
     let idx = 0;
-    while (idx<k && element.prev){
+    while (idx < k && element.prev) {
       element = element.prev;
       idx++;
     }
-    if (idx < k) { /*no-op*/ }
-    while(element.prev){
+    if (idx < k) { /*no-op*/
+    }
+    while (element.prev) {
       element = element.prev;
       runner = runner.prev;
     }
     this.delete(runner);
   }
 
-  removeDupes(){
+  removeDupes() {
     const found = new Set();
     let element = this.head;
-    while(element.prev){
+    while (element.prev) {
       found.add(element.value);
       element = element.prev;
       if (found.has(element.value)) this.delete(element.value);
