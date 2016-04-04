@@ -78,7 +78,22 @@ describe('BinarySearchTree', () => {
     expect(recordAllData(four)).toEqual([ 4, 5 ]);
   });
 
-  it('iterating over complex tree', () => {
+  // it('iterating over complex tree', () => {
+  //   let four = new BinarySearchTree(4);
+  //   four.insert(2);
+  //   four.insert(1);
+  //   four.insert(3);
+  //   four.insert(6);
+  //   four.insert(7);
+  //   four.insert(5);
+  //
+  //   expect(recordAllData(four)).toEqual([ 1, 2, 3, 4, 5, 6, 7 ]);
+  //   // displayAllData(four);
+  //   // four.traverseDepthFirst();
+  //   four.traverseBreadthFirst(four);
+  // });
+
+  it('flattens a big tree', () => {
     let four = new BinarySearchTree(4);
     four.insert(2);
     four.insert(1);
@@ -87,10 +102,11 @@ describe('BinarySearchTree', () => {
     four.insert(7);
     four.insert(5);
 
-    expect(recordAllData(four)).toEqual([ 1, 2, 3, 4, 5, 6, 7 ]);
-    // displayAllData(four);
-    // four.traverseDepthFirst();
-    four.traverseBreadthFirst(four);
+    four.inOrderTraversal(four);
+    console.log("*******");
+    four.preOrderTraversal(four);
+    console.log("*******");
+    four.postOrderTraversal(four);
   });
 
 });

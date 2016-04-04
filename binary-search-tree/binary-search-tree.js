@@ -70,7 +70,30 @@ export default class BinarySearchTree {
     }
   }
 
+  inOrderTraversal(node){
+    if (node !=null){
+      this.inOrderTraversal(node.left);
+      this.visit(node);
+      this.inOrderTraversal(node.right);
+    }
+  }
 
+  preOrderTraversal(node){
+    if(node != null){
+      this.visit(node);
+      this.preOrderTraversal(node.left);
+      this.preOrderTraversal(node.right);
+    }
+  }
+
+  postOrderTraversal(node){
+    if(node != null){
+      this.postOrderTraversal(node.left);
+      this.postOrderTraversal(node.right);
+      this.visit(node);
+    }
+  }
+  
   visit(node) {
     console.log(node.data);
   }
